@@ -54,6 +54,33 @@
 
 
 
+<script>
+    const nameElement = document.getElementById('name-changer');
+    const originalText = "Solaiman Shahria";
+    const newText = "Solaiman Shahria Shishir";
+    let isChanged = false; // নাম কি এখন নতুনটা? সেটা চেক করবে
+
+    nameElement.addEventListener('click', () => {
+        // ফেড আউট শুরু
+        nameElement.style.opacity = 0;
+
+        setTimeout(() => {
+            // নাম পরিবর্তন
+            if (!isChanged) {
+                nameElement.textContent = newText;
+                isChanged = true;
+            } else {
+                nameElement.textContent = originalText;
+                isChanged = false;
+            }
+            
+            // ফেড ইন
+            nameElement.style.opacity = 1;
+        }, 500); // ০.৫ সেকেন্ড পর লেখা বদলাবে
+    });
+</script>
+
+
 
 
 
