@@ -1106,7 +1106,7 @@ input, select, textarea {
 
 
 
-/* আপনার নামের স্টাইল অনুযায়ী ছোট লেখাটির আপডেট */
+/* আপনার নামের স্টাল অনুযায়ী ছোট লেখাটির আপডেট */
 #header p {
     color: #ffffff !important; /* নাম যে রঙের, এটাও সেই রঙের */
     font-weight: 600 !important;
@@ -1115,8 +1115,3 @@ input, select, textarea {
     font-size: 1.2em; /* আপনার পছন্দমতো সাইজ এখানে বাড়িয়ে বা কমিয়ে অ্যাডজাস্ট করতে পারেন */
     transition: opacity 0.5s ease;
 }
-
-
-
-
-
