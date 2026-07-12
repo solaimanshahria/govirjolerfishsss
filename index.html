@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="assets/css/images/favicon.ico">
+        <title>Solaiman Shahria</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <div id="wrapper">
+            <div id="bg"></div>
+            <div id="overlay"></div>
+            <div id="main">
+
+                <!-- Header -->
+                    <header id="header">
+                        <h1 id="name-changer">Solaiman Shahria</h1>
+                        <p id="sub-header">
+    <span class="hover-word">Creative</span> &bull; 
+    <span class="hover-word">Perfectionist</span> &bull; 
+    <span class="hover-word">Gamer</span>
+</p>
+                        <nav>
+                            <ul>
+                                <li><a href="https://facebook.com/solaimanshahria" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                                <li><a href="https://instagram.com/solaimanshahria" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                                <li><a href="https://x.com/xolaimanshahria" class="icon brands fa-twitter"><span class="label">X</span></a></li>
+                               <li><a href="https://discord.gg/nBTr3dPHGM" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+                                <li><a href="https://themaverickbd.com" class="icon solid fa-globe"><span class="label">Website</span></a></li>
+                            </ul>
+                        </nav>
+                    </header>
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <span class="copyright">&copy; Solaiman Shahria | Contact: contactsolaimanshahria@gmail.com</span>
+                </footer>
+
+            </div>
+        </div>
+        <script>
+            window.onload = function() { document.body.classList.remove('is-preload'); }
+            window.ontouchmove = function() { return false; }
+            window.onorientationchange = function() { document.body.scrollTop = 0; }
+        </script>
+
+
+
+
+
+
+
+
+
+<script>
+    const nameElement = document.getElementById('name-changer');
+    const originalText = "Solaiman Shahria";
+    const newText = "Solaiman Shahria Shishir";
+    let isChanged = false; // নাম কি এখন নতুনটা? সেটা চেক করবে
+
+    nameElement.addEventListener('click', () => {
+        // ফেড আউট শুরু
+        nameElement.style.opacity = 0;
+
+        setTimeout(() => {
+            // নাম পরিবর্তন
+            if (!isChanged) {
+                nameElement.textContent = newText;
+                isChanged = true;
+            } else {
+                nameElement.textContent = originalText;
+                isChanged = false;
+            }
+            
+            // ফেড ইন
+            nameElement.style.opacity = 1;
+        }, 500); // ০.৫ সেকেন্ড পর লেখা বদলাবে
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
