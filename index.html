@@ -1,92 +1,47 @@
 <!DOCTYPE HTML>
-<html>
-    <head>
-        <link rel="icon" type="image/x-icon" href="assets/css/images/favicon.ico">
-        <title>Solaiman Shahria</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    </head>
-    <body class="is-preload">
-        <div id="wrapper">
-            <div id="bg"></div>
-            <div id="overlay"></div>
-            <div id="main">
-
-                <!-- Header -->
-                    <header id="header">
-                        <h1 id="name-changer">Solaiman Shahria</h1>
-                        <p id="sub-header">
-    <span class="hover-word">Creative</span> &bull; 
-    <span class="hover-word">Perfectionist</span> &bull; 
-    <span class="hover-word">Gamer</span>
-</p>
-                        <nav>
-                            <ul>
-                                <li><a href="https://facebook.com/solaimanshahria" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                                <li><a href="https://instagram.com/solaimanshahria" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                                <li><a href="https://x.com/xolaimanshahria" class="icon brands fa-twitter"><span class="label">X</span></a></li>
-                               <li><a href="https://discord.gg/nBTr3dPHGM" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-                                <li><a href="https://themaverickbd.com" class="icon solid fa-globe"><span class="label">Website</span></a></li>
-                            </ul>
-                        </nav>
-                    </header>
-
-                <!-- Footer -->
-                <footer id="footer">
-                    <span class="copyright">&copy; Solaiman Shahria | Contact: contactsolaimanshahria@gmail.com</span>
-                </footer>
-
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Solaiman Shahria Shishir</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scene">
+        <div class="card">
+            <div class="glow"></div>
+            
+            <h1 id="name-changer">Solaiman Shahria</h1>
+            <p class="subtitle">Creative • Perfectionist • Gamer</p>
+            
+            <div class="social">
+                <a href="https://facebook.com/solaimanshahria" target="_blank" class="icon fb">f</a>
+                <a href="https://instagram.com/solaimanshahria" target="_blank" class="icon ig">📷</a>
+                <a href="https://x.com/xolaimanshahria" target="_blank" class="icon x">𝕏</a>
+                <a href="https://discord.gg/nBTr3dPHGM" target="_blank" class="icon dc">D</a>
+                <a href="https://themaverickbd.com" target="_blank" class="icon web">🌐</a>
+            </div>
+            
+            <div class="footer-text">
+                contactsolaimanshahria@gmail.com
             </div>
         </div>
-        <script>
-            window.onload = function() { document.body.classList.remove('is-preload'); }
-            window.ontouchmove = function() { return false; }
-            window.onorientationchange = function() { document.body.scrollTop = 0; }
-        </script>
+    </div>
 
+    <script>
+        const nameEl = document.getElementById('name-changer');
+        let isShishir = false;
 
-
-
-
-
-
-
-
-<script>
-    const nameElement = document.getElementById('name-changer');
-    const originalText = "Solaiman Shahria";
-    const newText = "Solaiman Shahria Shishir";
-    let isChanged = false; // নাম কি এখন নতুনটা? সেটা চেক করবে
-
-    nameElement.addEventListener('click', () => {
-        // ফেড আউট শুরু
-        nameElement.style.opacity = 0;
-
-        setTimeout(() => {
-            // নাম পরিবর্তন
-            if (!isChanged) {
-                nameElement.textContent = newText;
-                isChanged = true;
-            } else {
-                nameElement.textContent = originalText;
-                isChanged = false;
-            }
-            
-            // ফেড ইন
-            nameElement.style.opacity = 1;
-        }, 500); // ০.৫ সেকেন্ড পর লেখা বদলাবে
-    });
-</script>
-
-
-
-
-
-
-
-
-
-    </body>
+        nameEl.addEventListener('click', () => {
+            isShishir = !isShishir;
+            nameEl.style.transition = '0.6s';
+            nameEl.style.opacity = '0';
+            setTimeout(() => {
+                nameEl.textContent = isShishir ? "Solaiman Shahria Shishir" : "Solaiman Shahria";
+                nameEl.style.opacity = '1';
+            }, 300);
+        });
+    </script>
+</body>
 </html>
