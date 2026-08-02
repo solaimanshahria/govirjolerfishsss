@@ -1,94 +1,149 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <link rel="icon" type="image/x-icon" href="assets/css/images/favicon.ico">
-        <title>Solaiman Shahria</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    </head>
-    <body class="is-preload">
-        <div id="wrapper">
-            <div id="bg"></div>
-            <div id="overlay"></div>
-            <div id="main">
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+  <meta content="Solaiman Shahria Shishir &mdash; interactive digital identity." name="description"/>
+  <meta content="#050505" name="theme-color"/>
+  <title>
+   Solaiman Shahria Shishir
+  </title>
 
-                <!-- Header -->
-                    <header id="header">
-                        <h1 id="name-changer">Solaiman Shahria</h1>
-                        <p id="sub-header">
-    <span class="hover-word">Creative</span> &bull; 
-    <span class="hover-word">Perfectionist</span> &bull; 
-    <span class="hover-word">Gamer</span>
-</p>
-                        <nav>
-                            <ul>
-                                <li><a href="https://facebook.com/solaimanshahria" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                                <li><a href="https://instagram.com/solaimanshahria" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                                <li><a href="https://x.com/xolaimanshahria" class="icon brands fa-twitter"><span class="label">X</span></a></li>
-                               <li><a href="https://discord.gg/nBTr3dPHGM" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-                               <li><a href="https://playboyshishir.com" class="icon solid fa-globe"><span class="label">Website</span></a></li>
-                                <li><a href="https://themaverickbd.com" class="icon solid fa-globe"><span class="label">Website</span></a></li>
-                                  
-                            </ul>
-                        </nav>
-                    </header>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="noise">
+  </div>
+  <div class="cursor">
+  </div>
+  <div class="cursor-ring">
+  </div>
+  <div class="flash">
+  </div>
+  <section class="boot" id="boot">
+   <button class="skip hoverable" id="skip">
+    Skip intro
+   </button>
+   <div class="terminal">
+    <div class="terminal-line">
+     <span class="prompt">
+      &gt;
+     </span>
+     <span id="command">
+     </span>
+     <span class="blink">
+     </span>
+    </div>
+    <div class="terminal-line" id="o1">
+    </div>
+    <div class="terminal-line" id="o2">
+    </div>
+    <div class="terminal-line" id="o3">
+    </div>
+   </div>
+  </section>
+  <section class="scene" id="scene">
+   <canvas id="canvas">
+   </canvas>
+   <div class="giant" id="giant">
+    PLAYER
+   </div>
+   <main class="main" id="main">
+    <section class="identity">
+     <div class="orbit">
+     </div>
+     <div class="name-wrap" id="nameWrap">
 
-                <!-- Footer -->
-                <footer id="footer">
-                    <span class="copyright">&copy; Solaiman Shahria | Contact: contactsolaimanshahria@gmail.com</span>
-                </footer>
-
-            </div>
-        </div>
-        <script>
-            window.onload = function() { document.body.classList.remove('is-preload'); }
-            window.ontouchmove = function() { return false; }
-            window.onorientationchange = function() { document.body.scrollTop = 0; }
-        </script>
-
-
-
-
-
-
-
-
-
-<script>
-    const nameElement = document.getElementById('name-changer');
-    const originalText = "Solaiman Shahria";
-    const newText = "Solaiman Shahria Shishir";
-    let isChanged = false; // নাম কি এখন নতুনটা? সেটা চেক করবে
-
-    nameElement.addEventListener('click', () => {
-        // ফেড আউট শুরু
-        nameElement.style.opacity = 0;
-
-        setTimeout(() => {
-            // নাম পরিবর্তন
-            if (!isChanged) {
-                nameElement.textContent = newText;
-                isChanged = true;
-            } else {
-                nameElement.textContent = originalText;
-                isChanged = false;
-            }
-            
-            // ফেড ইন
-            nameElement.style.opacity = 1;
-        }, 500); // ০.৫ সেকেন্ড পর লেখা বদলাবে
-    });
-</script>
-
-
-
-
-
-
-
-
-
-    </body>
+      <div class="tag">
+       <span>
+        Creative
+       </span>
+       <i>
+       </i>
+       <span>
+        Perfectionist
+       </span>
+       <i>
+       </i>
+       <span>
+        Gamer
+       </span>
+      </div>
+     <h1 class="name" id="heroName">
+       <span class="word one">
+        Solaiman
+       </span>
+       <span class="word two">
+        Shahria
+       </span>
+       <span class="word three">
+        Shishir
+       </span>
+      </h1></div>
+    </section>
+    <footer class="bottom">
+     <p class="footer-line">
+      Contact:
+      <a class="footer-email hoverable" href="mailto:contactsolaimanshahria@gmail.com">
+       contactsolaimanshahria@gmail.com
+      </a>
+     </p>
+    </footer>
+   </main>
+   <nav aria-label="Social links" class="socials">
+    <a class="social hoverable" data-command="facebook" href="https://facebook.com/solaimanshahria" rel="noopener" target="_blank">
+     <span>
+      Facebook
+     </span>
+     <i class="fa-brands fa-facebook-f">
+     </i>
+    </a>
+    <a class="social hoverable" data-command="instagram" href="https://instagram.com/solaimanshahria" rel="noopener" target="_blank">
+     <span>
+      Instagram
+     </span>
+     <i class="fa-brands fa-instagram">
+     </i>
+    </a>
+    <a class="social hoverable" data-command="x" href="https://x.com/xolaimanshahria" rel="noopener" target="_blank">
+     <span>
+      X / Twitter
+     </span>
+     <i class="fa-brands fa-x-twitter">
+     </i>
+    </a>
+    <a class="social hoverable" data-command="discord" href="https://discord.gg/nBTr3dPHGM" rel="noopener" target="_blank">
+     <span>
+      Discord
+     </span>
+     <i class="fa-brands fa-discord">
+     </i>
+    </a>
+    <a class="social hoverable" data-command="website" href="https://playboyshishir.com" rel="noopener" target="_blank">
+     <span>
+      Website
+     </span>
+     <i class="fa-solid fa-globe">
+     </i>
+    </a>
+   </nav>
+  </section>
+  <div class="leave" id="leave">
+   <p>
+    Thanks for visiting.
+    <br/>
+    <span style="color:var(--accent)">
+     See you in the next time.
+    </span>
+   </p>
+  </div>
+  <script src="script.js">
+  </script>
+ </body>
 </html>
+
