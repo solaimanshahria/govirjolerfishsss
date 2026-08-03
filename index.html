@@ -16,7 +16,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
   <link href="style.css" rel="stylesheet"/>
  </head>
- <body>
+ <body class="boot-active">
   <div class="noise">
   </div>
   <div class="cursor">
@@ -26,25 +26,24 @@
   <div class="flash">
   </div>
   <section class="boot" id="boot">
-   <button class="skip hoverable" id="skip">
-    Skip intro
-   </button>
    <div class="terminal">
-    <div class="terminal-line">
-     <span class="prompt">
-      &gt;
-     </span>
-     <span id="command">
-     </span>
-     <span class="blink">
-     </span>
+    <div class="boot-stage number-stage" id="numberStage" aria-hidden="false">
+     <form class="number-form" id="numberForm" autocomplete="off">
+      <label for="accessNumber">TYPE A NUMBER TO ACCESS HOME PAGE</label>
+      <div class="number-entry">
+       <span class="prompt">&gt;</span>
+       <input id="accessNumber" name="accessNumber" type="number" min="1" step="1" inputmode="numeric" required autofocus/>
+       <button class="number-submit hoverable" type="submit">ENTER</button>
+      </div>
+      <p class="number-error" id="numberError" aria-live="polite"></p>
+     </form>
+
+     <div class="counter-panel" id="counterPanel" aria-live="polite">
+      <p>HOME PAGE OPENING IN</p>
+      <strong><span id="currentCount">0</span></strong>
+     </div>
     </div>
-    <div class="terminal-line" id="o1">
-    </div>
-    <div class="terminal-line" id="o2">
-    </div>
-    <div class="terminal-line" id="o3">
-    </div>
+
    </div>
   </section>
   <section class="scene" id="scene">
@@ -88,7 +87,7 @@
     </section>
     <footer class="bottom">
      <p class="footer-line">
-      Contact:
+      <span class="contact-label">Contact:</span>
       <a class="footer-email hoverable" href="mailto:contactsolaimanshahria@gmail.com">
        contactsolaimanshahria@gmail.com
       </a>
@@ -133,15 +132,6 @@
     </a>
    </nav>
   </section>
-  <div class="leave" id="leave">
-   <p>
-    Thanks for visiting.
-    <br/>
-    <span style="color:var(--accent)">
-     See you in the next time.
-    </span>
-   </p>
-  </div>
   <script src="script.js">
   </script>
  </body>

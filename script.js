@@ -5,99 +5,85 @@ const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, millise
 const boot = $('#boot');
 const main = $('#main');
 const flash = $('.flash');
-const command = $('#command');
-const outputOne = $('#o1');
-const outputTwo = $('#o2');
-const outputThree = $('#o3');
+const numberStage = $('#numberStage');
+const numberForm = $('#numberForm');
+const accessNumber = $('#accessNumber');
+const numberError = $('#numberError');
+const currentCount = $('#currentCount');
 
+const COUNT_DELAY_MS = 100;
 let entered = false;
+let counting = false;
 
-async function typeText(element, text, speed = 50) {
-    for (const character of text) {
-        element.textContent += character;
-        await sleep(speed);
-    }
-}
+async function startCounter(target) {
+    counting = true;
+    numberStage.classList.add('is-counting');
+    currentCount.textContent = String(target);
 
-async function eraseText(element, speed = 28) {
-    while (element.textContent) {
-        element.textContent = element.textContent.slice(0, -1);
-        await sleep(speed);
-    }
-}
-
-async function intro() {
-    await sleep(450);
-    await typeText(command, 'whoami', 85);
-    await sleep(400);
-
-    for (const name of ['Solaiman', 'Shahria', 'Shishir']) {
-        await typeText(outputOne, name, 82);
-        await sleep(420);
-        await eraseText(outputOne);
+    for (let count = target; count >= 0; count -= 1) {
+        currentCount.textContent = String(count);
+        if (count > 0) await sleep(COUNT_DELAY_MS);
     }
 
-    await typeText(outputTwo, 'Identity verified.', 42);
-    await sleep(380);
-    await typeText(outputThree, 'Welcome to my world.', 42);
-    await sleep(580);
+    await sleep(220);
     enterSite();
 }
 
-function enterSite() {
-    if (entered) {
+numberForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (counting || entered) return;
+
+    const target = Number(accessNumber.value);
+    if (!Number.isSafeInteger(target) || target < 1) {
+        numberError.textContent = 'TYPE A WHOLE NUMBER GREATER THAN 0';
+        accessNumber.focus();
         return;
     }
 
+    numberError.textContent = '';
+    startCounter(target);
+});
+
+function enterSite() {
+    if (entered) return;
     entered = true;
-    flash.classList.add('go');
-    document.body.classList.add('shake');
 
-    setTimeout(() => {
-        document.body.classList.remove('shake');
-    }, 500);
-
+    document.body.classList.add('intro-active');
     boot.classList.add('hide');
+    document.body.classList.remove('boot-active');
     main.classList.add('show');
+    flash.classList.add('go');
 
-    if (hasFinePointer) {
-        setTimeout(() => {
-            breakIdentity();
-        }, 800);
-    }
+    // Remove only the entrance class after every staged animation completes.
+    // The original ambient animations then continue normally.
+    setTimeout(() => {
+        document.body.classList.remove('intro-active');
+        document.body.classList.add('intro-complete');
+    }, 6500);
 }
 
-$('#skip').addEventListener('click', enterSite);
-intro();
+requestAnimationFrame(() => accessNumber.focus());
 
-const cursor = $('.cursor');
-const cursorRing = $('.cursor-ring');
-
+const hasFinePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 let mouseX = innerWidth / 2;
 let mouseY = innerHeight / 2;
-let ringX = mouseX;
-let ringY = mouseY;
-const hasFinePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 let ambientTime = 0;
 
 if (hasFinePointer) {
-addEventListener('mousemove', event => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    addEventListener('mousemove', event => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
 
-    cursor.style.left = `${mouseX}px`;
-    cursor.style.top = `${mouseY}px`;
+        document.documentElement.style.setProperty('--mx', `${mouseX}px`);
+        document.documentElement.style.setProperty('--my', `${mouseY}px`);
 
-    document.documentElement.style.setProperty('--mx', `${mouseX}px`);
-    document.documentElement.style.setProperty('--my', `${mouseY}px`);
+        const offsetX = (mouseX - innerWidth / 2) / innerWidth;
+        const offsetY = (mouseY - innerHeight / 2) / innerHeight;
 
-    const offsetX = (mouseX - innerWidth / 2) / innerWidth;
-    const offsetY = (mouseY - innerHeight / 2) / innerHeight;
-
-    $('#nameWrap').style.setProperty('--tx', `${offsetX * 20}px`);
-    $('#nameWrap').style.setProperty('--ty', `${offsetY * 13}px`);
-    $('#giant').style.setProperty('--rot', `${-10 + offsetX * 12}deg`);
-});
+        $('#nameWrap').style.setProperty('--tx', `${offsetX * 20}px`);
+        $('#nameWrap').style.setProperty('--ty', `${offsetY * 13}px`);
+        $('#giant').style.setProperty('--rot', `${-10 + offsetX * 12}deg`);
+    }, { passive: true });
 }
 
 (function animateAmbientFocus() {
@@ -112,28 +98,6 @@ addEventListener('mousemove', event => {
     requestAnimationFrame(animateAmbientFocus);
 })();
 
-(function animateCursorRing() {
-    ringX += (mouseX - ringX) * 0.15;
-    ringY += (mouseY - ringY) * 0.15;
-
-    if (hasFinePointer) {
-        cursorRing.style.left = `${ringX}px`;
-        cursorRing.style.top = `${ringY}px`;
-    }
-
-    requestAnimationFrame(animateCursorRing);
-})();
-
-$$('.hoverable').forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        document.body.classList.add('hovering');
-    });
-
-    element.addEventListener('mouseleave', () => {
-        document.body.classList.remove('hovering');
-    });
-});
-
 let characterIndex = 0;
 
 $$('.word').forEach(word => {
@@ -145,10 +109,18 @@ $$('.word').forEach(word => {
         .join('');
 });
 
+// Split the contact email into individual letters for the staged entrance.
+const footerEmail = $('.footer-email');
+if (footerEmail) {
+    const emailText = footerEmail.textContent.trim();
+    footerEmail.setAttribute('aria-label', emailText);
+    footerEmail.innerHTML = [...emailText]
+        .map((character, index) => `<span class="email-char" aria-hidden="true" style="--email-index:${index}">${character}</span>`)
+        .join('');
+}
+
 function breakIdentity() {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     $$('.char').forEach((character, index) => {
         const x = (Math.random() - 0.5) * 34;
@@ -167,22 +139,6 @@ function breakIdentity() {
                 easing: 'cubic-bezier(.2,.8,.2,1)'
             }
         );
-    });
-}
-
-if (hasFinePointer) {
-    $$('.char').forEach(character => {
-        character.addEventListener('mousemove', event => {
-            const rect = character.getBoundingClientRect();
-            const offsetX = event.clientX - (rect.left + rect.width / 2);
-            const offsetY = event.clientY - (rect.top + rect.height / 2);
-
-            character.style.transform = `translate(${offsetX * 0.28}px, ${offsetY * 0.28}px)`;
-        });
-
-        character.addEventListener('mouseleave', () => {
-            character.style.transform = '';
-        });
     });
 }
 
@@ -247,16 +203,6 @@ resizeCanvas();
 
     requestAnimationFrame(drawDots);
 })();
-
-const leaveScreen = $('#leave');
-
-addEventListener('blur', () => {
-    leaveScreen.classList.add('show');
-});
-
-addEventListener('focus', () => {
-    leaveScreen.classList.remove('show');
-});
 
 
 // Restart CSS ambient animations after mobile browser tab/app resumes.
