@@ -221,14 +221,47 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Mobile fallback: open tapped links in the current tab.
-// This avoids mobile browsers silently ignoring target="_blank" taps.
-if (matchMedia('(hover: none), (pointer: coarse)').matches) {
-    document.addEventListener('click', event => {
-        const link = event.target.closest('.social, .footer-email');
-        if (!link || !link.href) return;
 
-        event.preventDefault();
-        window.location.assign(link.href);
-    }, true);
-}
+// Definitive mobile link-tap fix.
+(function enableReliableMobileLinks() {
+    const links = document.querySelectorAll('.social, .footer-email');
+
+    links.forEach(link => {
+        let touchNavigated = false;
+
+        link.addEventListener('touchend', event => {
+            if (!link.href) return;
+
+            touchNavigated = true;
+            event.preventDefault();
+            event.stopPropagation();
+            window.location.href = link.href;
+
+            setTimeout(() => {
+                touchNavigated = false;
+            }, 500);
+        }, { passive: false });
+
+        link.addEventListener('click', event => {
+            if (!link.href || touchNavigated) return;
+
+            // Keep normal desktop behavior; use reliable same-tab navigation on touch devices.
+            if (matchMedia('(hover: none), (pointer: coarse)').matches) {
+                event.preventDefault();
+                event.stopPropagation();
+                window.location.href = link.href;
+            }
+        });
+    });
+
+    // Completely remove the hidden access layer after its fade finishes.
+    const bootScreen = document.getElementById('boot');
+    if (bootScreen) {
+        bootScreen.addEventListener('transitionend', () => {
+            if (bootScreen.classList.contains('hide')) {
+                bootScreen.style.display = 'none';
+                bootScreen.style.pointerEvents = 'none';
+            }
+        });
+    }
+})();

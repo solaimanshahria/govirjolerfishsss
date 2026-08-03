@@ -2363,3 +2363,44 @@ body.intro-complete .footer-line {
         z-index: 9999 !important;
     }
 }
+
+
+/* =========================================================
+   DEFINITIVE MOBILE LINK TAP FIX
+   Decorative/animated layers must never capture taps.
+   ========================================================= */
+canvas,
+.noise,
+.cursor,
+.cursor-ring,
+.flash,
+.giant,
+.orbit,
+.scene::before,
+.scene::after,
+.identity,
+.name-wrap,
+#heroName,
+.tag {
+    pointer-events: none !important;
+}
+
+.socials,
+.socials .social,
+.socials .social *,
+.bottom,
+.footer-line,
+.footer-email,
+.footer-email * {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.socials {
+    z-index: 2147483647 !important;
+}
+
+.boot.hide {
+    pointer-events: none !important;
+}
