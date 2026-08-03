@@ -220,3 +220,15 @@ document.addEventListener('visibilitychange', () => {
         });
     }
 });
+
+// Mobile fallback: open tapped links in the current tab.
+// This avoids mobile browsers silently ignoring target="_blank" taps.
+if (matchMedia('(hover: none), (pointer: coarse)').matches) {
+    document.addEventListener('click', event => {
+        const link = event.target.closest('.social, .footer-email');
+        if (!link || !link.href) return;
+
+        event.preventDefault();
+        window.location.assign(link.href);
+    }, true);
+}

@@ -2331,3 +2331,35 @@ body.intro-complete .footer-line {
         letter-spacing: inherit !important;
     }
 }
+
+/* Mobile link hit-area fix: decorative layers never intercept taps. */
+@media (hover: none), (pointer: coarse), (max-width: 760px) {
+    .noise,
+    .flash,
+    canvas,
+    .scene::before,
+    .scene::after,
+    .orbit,
+    .giant,
+    .identity,
+    .name-wrap,
+    #heroName,
+    .tag {
+        pointer-events: none !important;
+    }
+
+    .socials,
+    .socials .social,
+    .socials .social *,
+    .bottom,
+    .footer-line,
+    .footer-email,
+    .footer-email * {
+        pointer-events: auto !important;
+        touch-action: manipulation;
+    }
+
+    .socials {
+        z-index: 9999 !important;
+    }
+}
